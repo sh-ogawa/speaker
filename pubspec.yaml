@@ -2,7 +2,7 @@ name: speaker
 description: Playing audio file
 version: 0.0.1
 author: sh-ogawa <syogo0417@gmail.com>
-homepage: https://github.com/sh-ogawa/speak
+homepage: https://github.com/sh-ogawa/speaker
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
