@@ -9,17 +9,24 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** SpeakerPlugin */
-public class SpeakerPlugin implements MethodCallHandler {
+public class SpeakerPlugin implements MethodCallHandler, Speaker.SpeakEndListener {
+
+  private final MethodChannel channel;
+
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "ooga04/speaker");
-    channel.setMethodCallHandler(new SpeakerPlugin());
+    MethodChannel channel = new MethodChannel(registrar.messenger(), "ooga04/speaker");
+    channel.setMethodCallHandler(new SpeakerPlugin(channel));
+  }
+
+  private SpeakerPlugin(MethodChannel channel) {
+    this.channel = channel;
   }
 
   @Override
   public void onMethodCall(MethodCall call, Result result) {
     if (call.method.equals("play")) {
-      Speaker speaker = new Speaker();
+      Speaker speaker = new Speaker(this);
       String resourceUri = call.argument("resourceUri");
       try {
         speaker.play(resourceUri);
@@ -31,5 +38,10 @@ public class SpeakerPlugin implements MethodCallHandler {
     } else {
       result.notImplemented();
     }
+  }
+
+  @Override
+  public void onSpeakEnd() {
+    channel.invokeMethod("onSpeakEnd", null);
   }
 }

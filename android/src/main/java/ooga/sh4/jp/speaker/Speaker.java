@@ -8,6 +8,11 @@ import java.io.IOException;
 class Speaker implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
 
     private static MediaPlayer player = new MediaPlayer();
+    private SpeakEndListener listener;
+
+    Speaker(SpeakEndListener listener) {
+        this.listener = listener;
+    }
 
     void play(String resourceUri) throws IOException {
         player.setOnPreparedListener(this);
@@ -23,18 +28,26 @@ class Speaker implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletio
     public void onCompletion(MediaPlayer mp) {
         Log.i("ooga04_speaker", "handle complete.");
         mp.release();
+        listener.onSpeakEnd();
     }
 
     @Override
     public void onPrepared(MediaPlayer mp) {
         Log.i("ooga04_speaker", "handle prepared.");
         mp.start();
-
     }
 
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
         mp.release();
+        listener.onSpeakEnd();
         return false;
+    }
+
+    public interface SpeakEndListener {
+        /**
+         * When MediaPlayer always end call this function.
+         */
+        void onSpeakEnd();
     }
 }
