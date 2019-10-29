@@ -1,14 +1,23 @@
 # speaker
 
-A new Flutter plugin.
+Play the specified resource as audio.
 
-## Getting Started
+# Feature
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+* Speaking resources over HTTP(S)
+* Plays audio even when the app is in the background
+* You can define what happens when playback ends (normal or abnormal)
+* There is no way to stop it if it starts in the current version
+* iOS isn't support.
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+# Usage
+
+```dart
+
+  var _speaker = Speaker(onSpeakEnd: () async {
+    // Write processing at the speak end.
+  });
+
+  await _speaker.play("speaking resource");
+
+```
