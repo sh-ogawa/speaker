@@ -1,6 +1,6 @@
-name: speaker
+name: ooga04_speaker
 description: Playing audio file
-version: 0.0.1
+version: 0.0.6
 author: sh-ogawa <syogo0417@gmail.com>
 homepage: https://github.com/sh-ogawa/speaker
 
@@ -18,4 +18,4 @@ dev_dependencies:
 flutter:
   plugin:
     androidPackage: ooga.sh4.jp.speaker
-    pluginClass: SpeakerPlugin
+    pluginClass: Ooga04SpeakerPlugin

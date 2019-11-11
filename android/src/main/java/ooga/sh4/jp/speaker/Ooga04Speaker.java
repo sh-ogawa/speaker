@@ -5,12 +5,12 @@ import android.util.Log;
 
 import java.io.IOException;
 
-class Speaker implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
+class Ooga04Speaker implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
 
     private static MediaPlayer player = new MediaPlayer();
     private SpeakEndListener listener;
 
-    Speaker(SpeakEndListener listener) {
+    Ooga04Speaker(SpeakEndListener listener) {
         this.listener = listener;
     }
 

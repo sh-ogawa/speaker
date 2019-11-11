@@ -1,10 +1,10 @@
 import Flutter
 import UIKit
 
-public class SwiftSpeakerPlugin: NSObject, FlutterPlugin {
+public class SwiftOoga04SpeakerPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "speaker", binaryMessenger: registrar.messenger())
-    let instance = SwiftSpeakerPlugin()
+    let channel = FlutterMethodChannel(name: "ooga04_speaker", binaryMessenger: registrar.messenger())
+    let instance = SwiftOoga04SpeakerPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 
