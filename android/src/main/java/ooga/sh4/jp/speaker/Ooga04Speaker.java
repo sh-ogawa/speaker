@@ -12,12 +12,21 @@ class Ooga04Speaker implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCom
 
     Ooga04Speaker(SpeakEndListener listener) {
         this.listener = listener;
-    }
-
-    void play(String resourceUri) throws IOException {
         player.setOnPreparedListener(this);
         player.setOnCompletionListener(this);
         player.setOnErrorListener(this);
+    }
+
+    void play(String resourceUri) throws IOException {
+        try {
+            if (player.isPlaying()) {
+                player.stop();
+                player.reset();
+            }
+        } catch (IllegalStateException $e) {
+            player.reset();
+        }
+
         player.setDataSource(resourceUri);
 
         player.prepare();
@@ -27,7 +36,7 @@ class Ooga04Speaker implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCom
     @Override
     public void onCompletion(MediaPlayer mp) {
         Log.i("ooga04_speaker", "handle complete.");
-        mp.release();
+        mp.reset();
         listener.onSpeakEnd();
     }
 
@@ -39,7 +48,7 @@ class Ooga04Speaker implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCom
 
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
-        mp.release();
+        mp.reset();
         listener.onSpeakEnd();
         return false;
     }
