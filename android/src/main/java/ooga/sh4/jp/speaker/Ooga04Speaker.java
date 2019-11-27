@@ -1,6 +1,8 @@
 package ooga.sh4.jp.speaker;
 
+import android.content.Context;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.util.Log;
 
 import java.io.IOException;
@@ -15,6 +17,22 @@ class Ooga04Speaker implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCom
         player.setOnPreparedListener(this);
         player.setOnCompletionListener(this);
         player.setOnErrorListener(this);
+    }
+
+    void play(Context context, Uri uri) throws IOException {
+        try {
+            if (player.isPlaying()) {
+                player.stop();
+                player.reset();
+            }
+        } catch (IllegalStateException $e) {
+            player.reset();
+        }
+
+        player.setDataSource(context, uri);
+
+        player.prepare();
+        Log.i("ooga04_speaker", "media player started play.");
     }
 
     void play(String resourceUri) throws IOException {

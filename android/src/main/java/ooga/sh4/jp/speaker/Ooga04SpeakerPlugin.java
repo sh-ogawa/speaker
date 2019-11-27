@@ -1,6 +1,7 @@
 package ooga.sh4.jp.speaker;
 
-import android.util.Log;
+import android.content.Context;
+import android.net.Uri;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,11 +16,13 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 /** Ooga04SpeakerPlugin */
 public class Ooga04SpeakerPlugin implements MethodCallHandler, Ooga04Speaker.SpeakEndListener {
 
+  private static Context context;
   private final MethodChannel channel;
   private List<String> playList;
 
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
+    context = registrar.context();
     MethodChannel channel = new MethodChannel(registrar.messenger(), "ooga04/speaker");
     channel.setMethodCallHandler(new Ooga04SpeakerPlugin(channel));
   }
@@ -61,7 +64,12 @@ public class Ooga04SpeakerPlugin implements MethodCallHandler, Ooga04Speaker.Spe
     String resourceUri = playList.get(0);
     playList.remove(0);
     try {
-      speaker.play(resourceUri);
+      if (!(resourceUri.startsWith("http://") || resourceUri.startsWith("https://"))) {
+        Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/raw/" + resourceUri);
+        speaker.play(context, uri);
+      } else {
+        speaker.play(resourceUri);
+      }
       return true;
     } catch (IOException e) {
       e.printStackTrace();
