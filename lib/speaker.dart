@@ -23,6 +23,14 @@ class Speaker {
     return result;
   }
 
+  Future<String> plays(List<String> resourceUriList, {bool isLocal = false}) async {
+    final String result = await _channel.invokeMethod('plays', {
+      'resourceUris': resourceUriList,
+    });
+
+    return result;
+  }
+
   /// platform -> flutter
   Future<dynamic> _handleMethod(MethodCall call) async {
     switch (call.method) {
