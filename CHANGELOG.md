@@ -4,3 +4,7 @@
 
 ## 0.0.9
 * supported ios
+
+## 0.0.10
+* add plays interface(only android support)
+* ios supported end audio play handler

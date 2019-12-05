@@ -21,3 +21,13 @@ Play the specified resource as audio.
   await _speaker.play("speaking resource");
 
 ```
+
+```dart
+
+  var _speaker = Speaker(onSpeakEnd: () async {
+    // Write processing at the all speak end.
+  });
+
+  await _speaker.plays(["speaking resource1", "speaking resource2"]);
+
+```
