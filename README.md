@@ -8,7 +8,7 @@ Play the specified resource as audio.
 * Plays audio even when the app is in the background
 * You can define what happens when playback ends (normal or abnormal)
 * There is no way to stop it if it starts in the current version
-* iOS isn't support.
+* iOS support.
 
 # Usage
 
@@ -28,6 +28,7 @@ Play the specified resource as audio.
     // Write processing at the all speak end.
   });
 
+　
   await _speaker.plays(["speaking resource1", "speaking resource2"]);
 
 ```
