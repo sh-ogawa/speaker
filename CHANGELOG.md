@@ -8,3 +8,6 @@
 ## 0.0.10
 * add plays interface(only android support)
 * ios supported end audio play handler
+
+## 0.0.11
+* add handle error play audio(only ios support)

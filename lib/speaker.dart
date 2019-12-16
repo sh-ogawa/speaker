@@ -8,8 +8,10 @@ class Speaker {
   static const MethodChannel _channel = const MethodChannel('ooga04/speaker');
 
   MessageHandler _onSpeakEnd;
-  Speaker({MessageHandler onSpeakEnd}) {
+  MessageHandler _onSpeakFailed;
+  Speaker({MessageHandler onSpeakEnd, MessageHandler onSpeakFailed}) {
     _onSpeakEnd = onSpeakEnd;
+    _onSpeakFailed = onSpeakFailed;
     _channel.setMethodCallHandler(_handleMethod);
   }
 
@@ -37,6 +39,13 @@ class Speaker {
       case "onSpeakEnd":
         _onSpeakEnd();
         return null;
+
+      case "onSpeakFailed":
+        if (_onSpeakFailed != null) {
+          _onSpeakFailed();
+        }
+        return null;
+
       default:
         throw UnsupportedError("Unrecognized JSON message");
     }
