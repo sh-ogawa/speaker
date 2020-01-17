@@ -11,3 +11,7 @@
 
 ## 0.0.11
 * add handle error play audio(only ios support)
+
+## 0.0.12
+* https://github.com/sh-ogawa/speaker/issues/3
+※ iOS doesn't show asset file.
