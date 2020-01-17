@@ -1,9 +1,7 @@
 package ooga.sh4.jp.speaker;
 
-import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.util.Log;
 
 import java.io.IOException;

@@ -32,3 +32,19 @@ Play the specified resource as audio.
   await _speaker.plays(["speaking resource1", "speaking resource2"]);
 
 ```
+
+# local audio file integration
+
+pubspec.yaml
+```yaml
+flutter:
+  assets:
+    - audios/example.mp3
+
+```
+
+```dart
+
+  _speaker.play("example.mp3");
+
+```

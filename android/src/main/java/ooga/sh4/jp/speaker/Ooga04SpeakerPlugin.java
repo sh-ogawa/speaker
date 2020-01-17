@@ -1,6 +1,5 @@
 package ooga.sh4.jp.speaker;
 
-import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 
@@ -26,7 +25,6 @@ public class Ooga04SpeakerPlugin implements MethodCallHandler, Ooga04Speaker.Spe
   public static void registerWith(Registrar registrar) {
     Ooga04SpeakerPlugin.registrar = registrar;
 
-    // context = registrar.context();
     MethodChannel channel = new MethodChannel(registrar.messenger(), "ooga04/speaker");
     channel.setMethodCallHandler(new Ooga04SpeakerPlugin(channel));
   }
@@ -74,8 +72,6 @@ public class Ooga04SpeakerPlugin implements MethodCallHandler, Ooga04Speaker.Spe
         AssetFileDescriptor fd = assetManager.openFd(key);
         speaker.play(fd);
 
-        // Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/raw/" + resourceUri);
-        // speaker.play(context, uri);
       } else {
         speaker.play(resourceUri);
       }
