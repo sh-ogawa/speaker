@@ -1,6 +1,7 @@
 package ooga.sh4.jp.speaker;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.util.Log;
@@ -19,7 +20,7 @@ class Ooga04Speaker implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCom
         player.setOnErrorListener(this);
     }
 
-    void play(Context context, Uri uri) throws IOException {
+    void play(AssetFileDescriptor fd) throws IOException {
         try {
             if (player.isPlaying()) {
                 player.stop();
@@ -29,7 +30,7 @@ class Ooga04Speaker implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCom
             player.reset();
         }
 
-        player.setDataSource(context, uri);
+        player.setDataSource(fd);
 
         player.prepare();
         Log.i("ooga04_speaker", "media player started play.");
